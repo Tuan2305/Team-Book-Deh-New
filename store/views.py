@@ -133,3 +133,14 @@ def search(request):
 #                 return redirect(url)
 
 
+def home(request):
+    products = Product.objects.all().filter(is_available=True)
+    categories = Category.objects.all()
+    
+    print("Categories count:", categories.count())  # Kiểm tra số lượng categories
+    
+    context = {
+        'products': products,
+        'categories': categories,
+    }
+    return render(request, 'home.html', context)
