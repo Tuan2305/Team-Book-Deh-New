@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-content padding-y bg">
+    <div class="container">
+        <div class="row">
+            <!-- Thông tin đặt hàng -->
+            <aside class="col-lg-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="card-title mb-0">Thông tin đặt hàng</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'place_order' %}" method="POST">
+                            {% csrf_token %}
+                            
+                            <!-- Thông tin người nhận -->
+                            <h5 class="mb-3">Thông tin người nhận</h5>
+                            <div class="form-row mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label for="first_name">Họ <span class="text-danger">*</span></label>
+                                    <input type="text" name="first_name" id="first_name" class="form-control" value="{{ user.first_name }}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="last_name">Tên <span class="text-danger">*</span></label>
+                                    <input type="text" name="last_name" id="last_name" class="form-control" value="{{ user.last_name }}" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label for="email">Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="email" id="email" class="form-control" value="{{ user.email }}" readonly>
+                                    <small class="text-muted">Email được lấy từ tài khoản của bạn</small>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone">Số điện thoại <span class="text-danger">*</span></label>
+                                    <input type="text" name="phone" id="phone" class="form-control" value="{{ user.phone_number }}" readonly>
+                                    <small class="text-muted">Số điện thoại được lấy từ tài khoản của bạn</small>
+                                </div>
+                            </div>
+                            
+                             <!-- Địa chỉ giao hàng -->
+<h5 class="mb-3 mt-4">Địa chỉ giao hàng</h5>
+
+<!-- Thành phố/Tỉnh và Quận/Huyện -->
+<div class="form-row mb-3">
+    <div class="col-md-6 mb-3">
+        <label for="city">Thành phố/Tỉnh <span class="text-danger">*</span></label>
+        <input type="text" name="city" id="city" class="form-control" placeholder="Thành phố, tỉnh..." required>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="district">Quận/Huyện <span class="text-danger">*</span></label>
+        <input type="text" name="district" id="district" class="form-control" placeholder="Quận, huyện..." required>
+    </div>
+</div>
+
+<!-- Phường/Xã và Địa chỉ chi tiết -->
+<div class="form-row mb-3">
+    <div class="col-md-6 mb-3">
+        <label for="ward">Phường/Xã <span class="text-danger">*</span></label>
+        <input type="text" name="ward" id="ward" class="form-control" placeholder="Phường, xã..." required>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="address">Địa chỉ chi tiết <span class="text-danger">*</span></label>
+        <input type="text" name="address" id="address" class="form-control" placeholder="Số nhà, tên đường..." required>
+    </div>
+</div>
+
+                            
+                            <!-- Ghi chú đơn hàng -->
+                            <div class="form-group mb-4">
+                                <label for="order_note">Ghi chú đơn hàng</label>
+                                <textarea name="order_note" id="order_note" rows="3" class="form-control" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay địa điểm giao hàng chi tiết."></textarea>
+                            </div>
+                        
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Tóm tắt đơn hàng -->
+            <aside class="col-lg-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="card-title mb-0">Tóm tắt đơn hàng</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <thead class="text-muted">
+                                <tr>
+                                    <th scope="col">Sản phẩm</th>
+                                    <th scope="col" width="120">Số lượng</th>
+                                    <th scope="col" width="120">Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cart_item in cart_items %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <div class="img-wrap" style="width: 50px; height: 50px;">
+                                                <img src="{{ cart_item.product.images.url }}" class="img-fluid" alt="{{ cart_item.product.product_name }}">
+                                            </div>
+                                            <div class="ml-2">
+                                                <p class="mb-0">{{ cart_item.product.product_name }}</p>
+                                                {% if cart_item.variations.all %}
+                                                <small class="text-muted">
+                                                    {% for item in cart_item.variations.all %}
+                                                    {{ item.variation_category|capfirst }}: {{ item.variation_value|capfirst }}
+                                                    {% if not forloop.last %}, {% endif %}
+                                                    {% endfor %}
+                                                </small>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ cart_item.quantity }}</td>
+                                    <td>{{ cart_item.sub_total }} VND</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2"><strong>Tổng tiền</strong></td>
+                                    <td><strong>{{ total }} VND</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        
+                        <hr class="mt-3 mb-3">
+                        
+                        <!-- Phương thức thanh toán -->
+                        
+                        <div class="form-group mb-4">
+                        
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="payment_card" name="payment_method" value="CARD" class="custom-control-input">
+                                <label class="custom-control-label" for="payment_card">Thẻ tín dụng/Ghi nợ</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" id="place-order-btn" class="btn btn-primary btn-lg btn-block">
+                                Đặt hàng
+                            </button>
+                            <a href="{% url 'store' %}" class="btn btn-outline-secondary btn-block mt-2">Tiếp tục mua sắm</a>
+                        </div>
+
+                        <!-- Thông báo đặt hàng thành công -->
+                        <div id="order-success-message" class="alert alert-success mt-3" style="display: none;"></div>
+                        </form>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Xử lý khi submit form
+    $('form').submit(function(e) {
+        // Nếu chọn thanh toán khi nhận hàng
+        if ($('#payment_cod').is(':checked')) {
+            e.preventDefault(); // Ngăn chặn form submit bình thường
+            
+            // Hiển thị trạng thái đang xử lý
+            $('#place-order-btn').prop('disabled', true);
+            $('#place-order-btn').html('<i class="fas fa-spinner fa-spin"></i> Đang xử lý...');
+            
+            // Gửi form qua AJAX
+            $.ajax({
+                type: 'POST',
+                url: '{% url "place_order" %}',
+                data: $(this).serialize(),
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                success: function(response) {
+                    if (response.success) {
+                        // Hiển thị thông báo thành công
+                        $('#order-success-message').show().html(`
+                            <i class="fas fa-check-circle mr-2"></i> 
+                            Đặt hàng thành công! Mã đơn hàng của bạn là: <strong>${response.order_number}</strong>
+                        `);
+                        
+                        // Cuộn đến thông báo
+                        $('html, body').animate({
+                            scrollTop: $('#order-success-message').offset().top - 100
+                        }, 500);
+                        
+                        // Chuyển hướng sau 3 giây
+                        setTimeout(function() {
+                            window.location.href = '{% url "dashboard" %}';
+                        }, 3000);
+                    } else {
+                        // Hiển thị lỗi nếu có
+                        alert('Lỗi: ' + response.message);
+                        $('#place-order-btn').prop('disabled', false);
+                        $('#place-order-btn').html('Đặt hàng');
+                    }
+                },
+                error: function() {
+                    alert('Đã xảy ra lỗi khi xử lý đơn hàng. Vui lòng thử lại.');
+                    $('#place-order-btn').prop('disabled', false);
+                    $('#place-order-btn').html('Đặt hàng');
+                }
+            });
+        }
+        // Nếu chọn thanh toán thẻ, form sẽ được gửi bình thường
+    });
+});
+</script>
+{% endblock %}
+
+
+{% endblock %}
