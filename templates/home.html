@@ -7,9 +7,9 @@
 <!-- SECTION 1: MAIN CAROUSEL (LEFT) & SIDE BANNERS (RIGHT) - Theo layout Fahasa -->
 <section class="section-main-banner-fahasa py-3">
     <div class="container">
-        <div class="row">
+        <div class="row pl-10 pr-10">
             <!-- Main Carousel (Left - 2/3 width) -->
-            <div class="col-lg-8 mb-3 mb-lg-0">
+            <div class="w-100 mb-3 mb-lg-0 ">
                 {# Sử dụng carousel từ code cũ của bạn #}
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
@@ -41,7 +41,7 @@
             </div>
 
             <!-- Side Banners (Right - 1/3 width) -->
-            <div class="col-lg-4">
+            {% comment %} <div class="col-lg-4">
                 <div class="mb-3">
                     {# Lấy một trong các ảnh banner từ code cũ của bạn cho vị trí này #}
                     {# Ví dụ: Banner "Quà Tặng Đặc Biệt" #}
@@ -50,62 +50,67 @@
                 <div>
                  <a href="#"><img src="/media/photos/test5.jpg" class="img-fluid rounded-lg" alt="Side Banner Bottom"></a> 
                 </div>
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
 </section>
 
 <section class="section-promotion-blocks-fahasa py-3">
     <div class="container">
-        <div class="row">
-            
-            <div class="col-6 col-md-3 mb-3">
-                <div class="card promo-card-fahasa text-center h-100">
-                    <a href="#">
-                        <img src="/media/photos/test7.jpg" class="card-img-top p-2 promo-image-fixed-height" alt="05.05 Đón Hè Rực Rỡ">
-                        
-                        <div class="card-body p-2 promo-card-fahasa-footer mt-auto" style="background-color: #ED5156;">
-                            <h6 class="card-title small text-white mb-0">MUA NGAY</h6>
-                        </div>
-                    </a>
-                </div>
+    <div class="row">
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card promo-card-fahasa text-center h-100"> 
+                <a href="#" class="promo-card-custom"> 
+                    <div class="promo-card-image-wrapper"> 
+                        <img src="/media/photos/test7.jpg" class="card-img-top" alt="05.05 Đón Hè Rực Rỡ"> 
+                    </div>
+                    <div class="card-body promo-card-fahasa-footer" style="background-color: #ED5156;">
+                        <h6 class="card-title small text-white mb-0">MUA NGAY</h6>
+                    </div>
+                </a>
             </div>
-            <!-- Block 2: Ảnh "26.05 Xả Kho" cũ -->
-            <div class="col-6 col-md-3 mb-3">
-                <div class="card promo-card-fahasa text-center h-100">
-                    <a href="#">
-                        {# Ảnh thứ 2 từ section "Lịch Săn Deal" cũ, bạn có thể cần thay đổi src nếu ảnh đầu tiên đã dùng #}
-                        <img src="/media/photos/test8.jpg" class="card-img-top p-2 promo-image-fixed-height" alt="26.05 Xả Kho">
-                         <div class="card-body p-2 promo-card-fahasa-footer mt-auto" style="background-color: #ED5156;">
-                            <h6 class="card-title small text-white mb-0">MUA NGAY</h6>
-                        </div>
-                    </a>
-                </div>
+        </div>
+
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card promo-card-fahasa text-center h-100"> 
+                <a href="#" class="promo-card-custom"> 
+                    <div class="promo-card-image-wrapper"> 
+                        <img src="/media/photos/test8.jpg" class="card-img-top" alt="26.05 Xả Kho"> 
+                    </div>
+                    <div class="card-body promo-card-fahasa-footer" style="background-color: #ED5156;">
+                        <h6 class="card-title small text-white mb-0">MUA NGAY</h6>
+                    </div>
+                </a>
             </div>
-            <!-- Block 3: Ảnh "15.05 Sale Giữa Tháng" cũ -->
-            <div class="col-6 col-md-3 mb-3">
-                <div class="card promo-card-fahasa text-center h-100">
-                    <a href="#">
-                        <img src="/media/photos/salegiuathang.jpg" class="card-img-top p-2 promo-image-fixed-height" alt="15.05 Sale Giữa Tháng">
-                         <div class="card-body p-2 promo-card-fahasa-footer mt-auto" style="background-color: #ED5156;">
-                            <h6 class="card-title small text-white mb-0">MUA NGAY</h6>
-                        </div>
-                    </a>
-                </div>
+        </div>
+
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card promo-card-fahasa text-center h-100"> 
+                <a href="#" class="promo-card-custom"> 
+                    <div class="promo-card-image-wrapper"> 
+                        <img src="/media/photos/salegiuathang.jpg" class="card-img-top" alt="15.05 Sale Giữa Tháng"> 
+                    </div>
+                    <div class="card-body promo-card-fahasa-footer" style="background-color: #ED5156;">
+                        <h6 class="card-title small text-white mb-0">MUA NGAY</h6>
+                    </div>
+                </a>
             </div>
-            <!-- Block 4: Ảnh "Thứ 4 Ngày Vàng" cũ -->
-            <div class="col-6 col-md-3 mb-3">
-                <div class="card promo-card-fahasa text-center h-100">
-                    <a href="#">
-                        <img src="/media/photos/test9.jpg" class="card-img-top p-2 promo-image-fixed-height" alt="Thứ 4 Ngày Vàng">
-                         <div class="card-body p-2 promo-card-fahasa-footer mt-auto" style="background-color: #ED5156;">
-                            <h6 class="card-title small text-white mb-0">MUA NGAY</h6>
-                        </div>
-                    </a>
-                </div>
+        </div>
+
+        <div class="col-6 col-md-3 mb-3">
+            <div class="card promo-card-fahasa text-center h-100 last-promo-item" > 
+                <a href="#" class="promo-card-custom"> 
+                    <div class="promo-card-image-wrapper"> 
+                        <img src="/media/photos/test9.jpg" class="" alt="Thứ 4 Ngày Vàng"> 
+                    </div>
+                    <div class="card-body promo-card-fahasa-footer" style="background-color: #ED5156;">
+                        <h6 class="card-title small text-white mb-0">MUA NGAY</h6>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
+</div>
 </section>
 
 
