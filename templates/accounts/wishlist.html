@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Danh sách yêu thích | Book Store{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<div class="bg-light py-3">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Tài khoản của tôi</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Danh sách yêu thích</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- Wishlist Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 mb-4 mb-md-0">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body text-center py-4">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem;">
+                                {{ user.first_name|first }}{{ user.last_name|first }}
+                            </div>
+                        </div>
+                        <h5 class="mb-1">{{ user.first_name }} {{ user.last_name }}</h5>
+                        <p class="text-muted small mb-3">{{ user.email }}</p>
+                    </div>
+                </div>
+                
+                <div class="list-group shadow-sm">
+                    <a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-tachometer-alt me-2"></i> Bảng điều khiển
+                    </a>
+                    <a href="{% url 'my_orders' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-shopping-bag me-2"></i> Đơn hàng của tôi
+                    </a>
+                    <a href="{% url 'edit_profile' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-user-edit me-2"></i> Thông tin cá nhân
+                    </a>
+                    <a href="{% url 'change_password' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-lock me-2"></i> Đổi mật khẩu
+                    </a>
+                    <a href="{% url 'address_book' %}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-map-marker-alt me-2"></i> Sổ địa chỉ
+                    </a>
+                  
+                    <a href="{% url 'logout' %}" class="list-group-item list-group-item-action text-danger">
+                        <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0">Sản phẩm yêu thích</h5>
+                    </div>
+                    <div class="card-body">
+                        {% include 'includes/alerts.html' %}
+                        
+                        <div class="row g-4">
+                            {% if wishlist_items %}
+                                {% for item in wishlist_items %}
+                                <div class="col-md-4">
+                                    <div class="card h-100 product-card">
+                                        <div class="position-relative">
+                                            <img src="{{ item.product.images.url }}" class="card-img-top" alt="{{ item.product.product_name }}">
+                                            <button type="button" class="btn btn-sm btn-danger position-absolute" style="top: 10px; right: 10px;">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                        <div class="card-body">
+                                            <h6 class="card-title text-truncate">{{ item.product.product_name }}</h6>
+                                            <p class="text-primary fw-bold mb-2">{{ item.product.price }} đ</p>
+                                            <div class="d-grid">
+                                                <a href="{% url 'add_cart' item.product.id %}" class="btn btn-outline-primary">
+                                                    <i class="fas fa-shopping-cart me-1"></i> Thêm vào giỏ
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="col-12 text-center py-5">
+                                    <div class="mb-4">
+                                        <i class="fas fa-heart text-muted" style="font-size: 4rem;"></i>
+                                    </div>
+                                    <h5 class="text-muted mb-4">Danh sách yêu thích của bạn đang trống</h5>
+                                    <a href="{% url 'store' %}" class="btn btn-primary">Tiếp tục mua sắm</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

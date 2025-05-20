@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-content padding-y bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="card-title">Chi tiết đơn hàng #{{ order.order_number }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Thông tin liên hệ</h5>
+                                <p class="mb-1">{{ order.full_name }}</p>
+                                <p class="mb-1">{{ order.email }}</p>
+                                <p class="mb-1">{{ order.phone }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Địa chỉ giao hàng</h5>
+                                <p class="mb-1">{{ order.address }}</p>
+                                <p class="mb-1">{{ order.ward }}, {{ order.district }}</p>
+                                <p class="mb-1">{{ order.city }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th class="text-right">Đơn giá</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in cart_items %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="{{ item.product.images.url }}" alt="{{ item.product.product_name }}" style="width: 50px; height: 50px; object-fit: cover;">
+                                                <div class="ml-3">
+                                                    <h6 class="mb-0">{{ item.product.product_name }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td class="text-right">{{ item.product.price }} VND</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"><strong>Tổng tiền</strong></td>
+                                        <td class="text-right"><strong>{{ total }} VND</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Thanh toán</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-3">Nhấn vào "Thanh toán ngay" để được chuyển đến trang thanh toán bảo mật của Stripe.</p>
+                        <button id="checkout-button" class="btn btn-primary btn-lg btn-block">
+                            Thanh toán ngay
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe('{{ stripe_publishable_key }}');
+    const checkoutButton = document.getElementById('checkout-button');
+    
+    checkoutButton.addEventListener('click', function() {
+        // Vô hiệu hóa nút để tránh nhiều lần nhấn
+        checkoutButton.disabled = true;
+        checkoutButton.textContent = 'Đang xử lý...';
+        
+        fetch('{% url "create_checkout_session" order.order_number %}')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(session) {
+            if(session.url) {
+                window.location.href = session.url;
+            } else {
+                return Promise.reject(session);
+            }
+        })
+        .catch(function(error) {
+            console.error('Lỗi:', error);
+            alert('Đã xảy ra sự cố khi tạo phiên thanh toán. Vui lòng thử lại.');
+            checkoutButton.disabled = false;
+            checkoutButton.textContent = 'Thanh toán ngay';
+        });
+    });
+</script>
+{% endblock %}
