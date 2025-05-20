@@ -126,7 +126,6 @@ a a {
     font-weight: 500;
     margin-bottom: 8px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     height: 40px;
@@ -201,7 +200,6 @@ a a {
     height: 40px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-decoration: none;
 }
@@ -660,8 +658,49 @@ input[readonly] {
     border-radius: 50%;
 }
 
-.promo-image-fixed-height{
-    height: 150px; /* Hoặc một giá trị phù hợp */
-    object-fit: cover; /* Giúp ảnh không bị méo khi cố định chiều cao */
+
+
+.promo-card-custom {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Quan trọng để thẻ <a> chiếm hết chiều cao card */
+}
+
+.promo-card-custom .promo-card-image-wrapper {
+    height: 120px; /* Đặt chiều cao cố định cho vùng ảnh. Bạn có thể thay đổi giá trị này */
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.promo-card-custom .promo-card-image-wrapper img {
+    display: block;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.promo-card-custom .promo-card-fahasa-footer {
+    /* margin-top: auto;  Bỏ cái này đi nếu muốn nó phình ra */
+    flex-grow: 1; /* Cho phép footer phình ra để chiếm không gian còn lại */
+    display: flex;
+    flex-direction: column; /* Để căn giữa nội dung trong footer mới */
+    justify-content: center; /* Căn giữa chữ MUA NGAY */
+    align-items: center;
+    background-color: #ED5156;
+    padding: 0.5rem; /* Đặt một ít padding cho dễ nhìn */
+    min-height: auto !important; /* Hoặc min-height: 0 !important; để thử loại bỏ min-height mặc định */
+
+}
+
+.promo-card-custom .promo-card-fahasa-footer h6 {
+    margin-bottom: 0;
+}
+
+
+/* CSS RIÊNG CHO FOOTER CỦA BOX CUỐI CÙNG */
+.last-promo-item .promo-card-custom .promo-card-fahasa-footer {
+    margin-top: 0; /* Ghi đè margin-top: auto từ rule chung */
+    flex-grow: 1;  /* Cho phép footer này phình ra */
+    /* Các thuộc tính display, align-items, justify-content đã có ở rule chung
+       sẽ giúp căn giữa chữ "MUA NGAY" khi footer cao hơn. */
 }
