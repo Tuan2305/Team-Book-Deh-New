@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% load static %} {% load custom_filters %} {% block
+title %}Chi tiết đơn hàng | Book Store{% endblock %} {% block content %}
+<!-- Breadcrumb -->
+<div class="bg-light py-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item">
+          <a href="{% url 'home' %}">Trang chủ</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'dashboard' %}">Tài khoản của tôi</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'my_orders' %}">Đơn hàng của tôi</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {{ order.order_number }}
+        </li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- Order Detail Section -->
+
+{% endblock %}
