@@ -77,42 +77,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% if orders %}
-                                        {% for order in orders %}
-                                        <tr>
-                                            <td>{{ order.order_number }}</td>
-                                            <td>{{ order.created_at|date:"d/m/Y" }}</td>
-                                            <td>{{ order.order_total|floatformat:0 }} VND</td>
-                                            <!-- Order status display -->
-                                            <td>
-                                                {% if order.status == 'New' %}
-                                                <span class="badge bg-info">New</span>
-                                                {% elif order.status == 'Accepted' %}
-                                                <span class="badge bg-primary">Accepted</span>
-                                                {% elif order.status == 'Completed' %}
-                                                <span class="badge bg-success">Completed</span>
-                                                {% elif order.status == 'Cancelled' %}
-                                                <span class="badge bg-danger">Cancelled</span>
-                                                {% else %}
-                                                <span class="badge bg-secondary">{{ order.status }}</span>
-                                                {% endif %}
-                                                
-                                                <!-- Payment status display -->
-                                                {% if order.payment %}
-                                                    {% if order.payment.status == 'COMPLETED' %}
-                                                    <span class="badge bg-success">Paid</span>
-                                                    {% elif order.payment.status == 'PENDING' %}
-                                                    <span class="badge bg-warning text-dark">Pending</span>
-                                                    {% else %}
-                                                    <span class="badge bg-secondary">{{ order.payment.status }}</span>
-                                                    {% endif %}
-                                                {% endif %}
-                                            </td>
-                                            <td>
-                                                <a href="{% url 'order_detail' order.order_number %}" class="btn btn-sm btn-outline-primary">Details</a>
-                                            </td>
-                                        </tr>
-                                        {% endfor %}
+                                    
                                     {% else %}
                                         <tr>
                                             <td colspan="5" class="text-center py-4">You don't have any orders yet</td>
