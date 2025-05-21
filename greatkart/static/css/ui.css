@@ -1528,3 +1528,48 @@ a[class*=card]:hover .title {
 .stock-status.out-of-stock { color: #D32F2F; /* Đỏ */}
 
 /*# sourceMappingURL=ui.css.map */
+
+/* Đảm bảo bạn đã nhúng Font Awesome vào dự án */
+.rate {
+    display: inline-block; /* Hoặc flex */
+    border: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.rate > input[type="radio"] { /* Ẩn các input radio gốc */
+    display: none;
+}
+.rate > label {
+    float: right; /* Đảo ngược thứ tự để chọn từ trái sang phải */
+    color: #e0e0e0; /* Màu sao mặc định (sao rỗng) */
+    font-size: 1.8rem; /* Kích thước sao - điều chỉnh nếu cần */
+    padding: 0 3px;
+    cursor: pointer;
+    transition: color 0.2s ease-out;
+}
+.rate > label:before {
+    content: "\f005"; /* Ký tự sao đầy của Font Awesome */
+    font-family: "Font Awesome 5 Free"; /* Hoặc Font Awesome 5 Solid/Brands tùy icon */
+    font-weight: 900; /* Để là sao solid */
+}
+
+/* Khi rê chuột qua một sao, sao đó và các sao bên trái nó sẽ đổi màu */
+.rate > label:hover,
+.rate > label:hover ~ label {
+    color: #FFD700; /* Màu vàng khi hover */
+}
+
+/* Khi một sao được chọn, sao đó và các sao bên trái nó sẽ có màu được chọn */
+.rate > input[type="radio"]:checked ~ label {
+    color: #FFC107; /* Màu vàng đậm hơn khi được chọn */
+}
+
+/* CSS cho half-star (nếu bạn dùng class="half" cho label) */
+/* Lưu ý: Half-star với CSS thuần và Font Awesome Free hơi phức tạp.
+   Cách đơn giản là dùng Font Awesome Pro có icon half-star riêng,
+   hoặc chấp nhận full-star cho các giá trị .5 khi input.
+   Nếu bạn muốn hiển thị half-star phức tạp hơn, cần JS hoặc CSS nâng cao.
+   Với HTML bạn cung cấp, class="half" trên label hiện tại không tự tạo half-star bằng CSS trên.
+   Nó chỉ là một class để bạn có thể target bằng JS hoặc CSS phức tạp hơn nếu muốn.
+   Trong code HTML bạn có value="4.5", "3.5",... server sẽ nhận được các giá trị này.
+*/
