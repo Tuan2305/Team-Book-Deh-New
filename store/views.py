@@ -184,38 +184,3 @@ def product_detail(request, category_slug, product_slug):
         'rating_counts': rating_counts,
     }
     return render(request, 'store/product_detail.html', context)
-
-@login_required(login_url='login')
-def submit_review(request, product_id):
-    url = request.META.get('HTTP_REFERER')
-    if request.method == 'POST':
-        try:
-            # Kiểm tra xem người dùng đã đánh giá sản phẩm này chưa
-            reviews = ReviewRating.objects.get(user__id=request.user.id, product__id=product_id)
-            # Nếu đã tồn tại, cập nhật đánh giá
-            form = ReviewForm(request.POST, instance=reviews)
-            form.save()
-            messages.success(request, 'Cảm ơn bạn! Đánh giá của bạn đã được cập nhật.')
-            return redirect(url)
-        except ReviewRating.DoesNotExist:
-            # Tạo đánh giá mới
-            form = ReviewForm(request.POST)
-            if form.is_valid():
-                data = ReviewRating()
-                data.subject = form.cleaned_data['subject']
-                data.rating = form.cleaned_data['rating']
-                data.review = form.cleaned_data['review']
-                data.product_id = product_id
-                data.user_id = request.user.id
-                data.save()
-                messages.success(request, 'Cảm ơn bạn! Đánh giá của bạn đã được gửi.')
-                return redirect(url)
-    
-    # Cho GET request hoặc lỗi form
-    product = get_object_or_404(Product, id=product_id)
-    context = {
-        'product': product,
-    }
-    return render(request, 'store/submit_review.html', context)
-
-
