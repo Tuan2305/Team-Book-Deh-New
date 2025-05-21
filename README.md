@@ -6,3 +6,7 @@ Then
 ```bash
 venv\Scripts\activate
 ```
+Next :3
+```bash
+pip install -r requirements.txt
+```
