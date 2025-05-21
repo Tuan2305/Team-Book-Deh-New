@@ -1415,4 +1415,116 @@ a[class*=card]:hover .title {
   display: block;
 }
 
+
+/* --- General Product Detail Page --- */
+.product-detail-container { /* Thẻ div bao quanh cả 2 cột */
+    padding: 30px 0; /* Tăng khoảng trắng trên dưới */
+}
+
+.product-image-column .img-big-wrap {
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden; /* Để bo góc có tác dụng với ảnh */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* --- Right Column: Content Body --- */
+.content-body { /* Class của article bên cột phải */
+    padding-left: 30px; /* Thêm khoảng cách với cột ảnh */
+}
+
+.content-body .title { /* Tên sản phẩm */
+    font-family: 'Montserrat', sans-serif; /* Ví dụ */
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 0.5rem; /* Giảm bớt nếu có Tác giả */
+}
+
+.product-author { /* Thêm class này cho tên tác giả */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.content-body .rating-star {
+    margin-bottom: 1.25rem;
+    display: flex; /* Để căn chỉnh sao và text */
+    align-items: center;
+}
+.content-body .rating-star i.fa-star,
+.content-body .rating-star i.fa-star-half-alt {
+    color: #FFC107;
+    font-size: 1.1rem; /* Kích thước sao */
+    margin-right: 2px;
+}
+.content-body .rating-star span.review-count-text { /* Bọc số review trong span này */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    color: #757575;
+    margin-left: 8px;
+}
+
+.content-body .price.h4.price-new-bold { /* Class bạn đã dùng cho giá */
+    font-family: 'Nunito', sans-serif; /* Ví dụ */
+    font-size: 2rem; /* Hoặc lớn hơn */
+    font-weight: 800;
+    color: #D32F2F; /* Màu đỏ đã chọn */
+    margin-bottom: 1rem;
+}
+/* Nếu có giá cũ */
+.price-old-detail {
+    font-size: 1rem;
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+.discount-badge-detail {
+    background-color: #FFEBEB; /* Nền nhạt cho % giảm giá */
+    color: #D32F2F;
+    padding: 3px 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+
+.content-body p { /* Mô tả ngắn */
+    font-family: 'Open Sans', sans-serif; /* Ví dụ */
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.content-body .btn-primary { /* Nút Mua ngay */
+    font-family: 'Montserrat', sans-serif; /* Ví dụ */
+    background-color: #D32F2F; /* Đồng bộ với màu giá */
+    border-color: #D32F2F;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-transform: uppercase; /* Chữ in hoa nếu muốn */
+    letter-spacing: 0.5px; /* Thêm chút khoảng cách chữ */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.content-body .btn-primary:hover {
+    background-color: #B71C1C; /* Màu đỏ đậm hơn khi hover */
+    border-color: #B71C1C;
+}
+.content-body .btn-primary .fa-shopping-cart {
+    margin-left: 8px;
+}
+
+/* Thêm CSS cho tình trạng tồn kho, bộ chọn số lượng nếu có */
+.stock-status {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.stock-status.in-stock { color: #2E7D32; /* Xanh lá */}
+.stock-status.out-of-stock { color: #D32F2F; /* Đỏ */}
+
 /*# sourceMappingURL=ui.css.map */
