@@ -144,18 +144,22 @@ title %}Order Details | Book Store{% endblock %} {% block content %}
                 <div class="order-tracking-timeline">
                   <!-- Timeline visualization -->
                   <div class="timeline-track">
-                    <div
-                      class="timeline-progress"
-                      style="width: 
-                    {% if order.status == 'New' %}0%
-                    {% elif order.status == 'Processing' %}25%
-                    {% elif order.status == 'Shipping' %}50%
-                    {% elif order.status == 'Delivered' %}75%
-                    {% elif order.status == 'Completed' %}100%
-                    {% elif order.status == 'Cancelled' %}0% 
-                    {% endif %}
-                "></div>
-
+                    <div class="timeline-progress"
+                    {% if order.status == 'New' %}
+                    style="width: 0%;"
+                    {% elif order.status == 'Processing' %}
+                    style="width: 25%;"
+                    {% elif order.status == 'Shipping' %}
+                    style="width: 50%;"
+                    {% elif order.status == 'Delivered' %}
+                    style="width: 75%;"
+                    {% elif order.status == 'Completed' %}
+                    style="width: 100%;"
+                    {% elif order.status == 'Cancelled' %}
+                    style="width: 0%;"
+                    {% endif %}>
+               </div>
+               
                     <div
                       class="timeline-step {% if order.status == 'New' or order.status == 'Processing' or order.status == 'Shipping' or order.status == 'Delivered' or order.status == 'Completed' %}active{% endif %}">
                       <div class="timeline-step-icon">
