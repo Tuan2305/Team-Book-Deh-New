@@ -6,14 +6,12 @@ Book Store{% endblock %} {% block content %}
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb mb-0">
         <li class="breadcrumb-item">
-          <a href="{% url 'home' %}">Trang chủ</a>
+          <a href="{% url 'home' %}">Homepage</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="{% url 'dashboard' %}">Tài khoản của tôi</a>
+          <a href="{% url 'dashboard' %}">My Dashboard</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">
-          Đơn hàng của tôi
-        </li>
+        <li class="breadcrumb-item active" aria-current="page">My Orders</li>
       </ol>
     </nav>
   </div>
@@ -43,33 +41,33 @@ Book Store{% endblock %} {% block content %}
           <a
             href="{% url 'dashboard' %}"
             class="list-group-item list-group-item-action">
-            <i class="fas fa-tachometer-alt me-2"></i> Bảng điều khiển
+            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
           </a>
           <a
             href="{% url 'my_orders' %}"
             class="list-group-item list-group-item-action active">
-            <i class="fas fa-shopping-bag me-2"></i> Đơn hàng của tôi
+            <i class="fas fa-shopping-bag me-2"></i> My Orders
           </a>
           <a
             href="{% url 'edit_profile' %}"
             class="list-group-item list-group-item-action">
-            <i class="fas fa-user-edit me-2"></i> Thông tin cá nhân
+            <i class="fas fa-user-edit me-2"></i> Edit Profile
           </a>
           <a
             href="{% url 'change_password' %}"
             class="list-group-item list-group-item-action">
-            <i class="fas fa-lock me-2"></i> Đổi mật khẩu
+            <i class="fas fa-lock me-2"></i> Change Password
           </a>
           <a
             href="{% url 'address_book' %}"
             class="list-group-item list-group-item-action">
-            <i class="fas fa-map-marker-alt me-2"></i> Sổ địa chỉ
+            <i class="fas fa-map-marker-alt me-2"></i> Address Book
           </a>
 
           <a
             href="{% url 'logout' %}"
             class="list-group-item list-group-item-action text-danger">
-            <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+            <i class="fas fa-sign-out-alt me-2"></i> Log Out
           </a>
         </div>
       </div>
@@ -78,18 +76,18 @@ Book Store{% endblock %} {% block content %}
       <div class="col-md-9">
         <div class="card shadow-sm border-0">
           <div class="card-header bg-white py-3">
-            <h5 class="mb-0">Lịch sử đơn hàng</h5>
+            <h5 class="mb-0">Order history</h5>
           </div>
           <div class="card-body p-0">
             <div class="table-responsive">
               <table class="table table-hover mb-0">
                 <thead class="bg-light">
                   <tr>
-                    <th>Mã đơn hàng</th>
-                    <th>Ngày đặt</th>
-                    <th>Tổng tiền</th>
-                    <th>Trạng thái</th>
-                    <th>Thao tác</th>
+                    <th>Order ID</th>
+                    <th>Date booked</th>
+                    <th>Total amount</th>
+                    <th>Status</th>
+                    <th>Operation</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -101,13 +99,13 @@ Book Store{% endblock %} {% block content %}
                     <!-- Phần hiển thị trạng thái đơn hàng -->
                     <td>
                       {% if order.status == 'New' %}
-                      <span class="badge bg-info">Mới</span>
+                      <span class="badge bg-info">New</span>
                       {% elif order.status == 'Accepted' %}
-                      <span class="badge bg-primary">Đã xác nhận</span>
+                      <span class="badge bg-primary">Accepted</span>
                       {% elif order.status == 'Completed' %}
-                      <span class="badge bg-success">Hoàn thành</span>
+                      <span class="badge bg-success">Completed</span>
                       {% elif order.status == 'Cancelled' %}
-                      <span class="badge bg-danger">Đã hủy</span>
+                      <span class="badge bg-danger">Cancelled</span>
                       {% else %}
                       <span class="badge bg-secondary">{{ order.status }}</span>
                       {% endif %}
@@ -115,10 +113,10 @@ Book Store{% endblock %} {% block content %}
                       <!-- Hiển thị trạng thái thanh toán -->
                       {% if order.payment %} {% if order.payment.status ==
                       'COMPLETED' %}
-                      <span class="badge bg-success">Đã thanh toán</span>
+                      <span class="badge bg-success">Payment Completed</span>
                       {% elif order.payment.status == 'PENDING' %}
                       <span class="badge bg-warning text-dark"
-                        >Chờ thanh toán</span
+                        >Payment Pending</span
                       >
                       {% else %}
                       <span class="badge bg-secondary"
@@ -130,14 +128,14 @@ Book Store{% endblock %} {% block content %}
                       <a
                         href="{% url 'order_detail' order.order_number %}"
                         class="btn btn-sm btn-outline-primary"
-                        >Chi tiết</a
+                        >Details</a
                       >
                     </td>
                   </tr>
                   {% endfor %} {% else %}
                   <tr>
                     <td colspan="5" class="text-center py-4">
-                      Bạn chưa có đơn hàng nào
+                      You have no orders yet!
                     </td>
                   </tr>
                   {% endif %}
@@ -151,4 +149,3 @@ Book Store{% endblock %} {% block content %}
   </div>
 </section>
 {% endblock %}
-
