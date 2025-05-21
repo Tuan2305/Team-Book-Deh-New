@@ -1,0 +1,196 @@
+{% load static %}
+
+<header
+  class="section-header"
+  style="font-family: Arial, sans-serif; font-size: 14px">
+  <!-- Top nav: Language + Contact -->
+  <nav
+    class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom"
+    style="background-color: #f8f9fa">
+    <div class="container d-flex justify-content-between">
+      <div class="d-flex">
+        <a href="#" class="nav-link px-2">English</a>
+        <a href="#" class="nav-link px-2">Japanese</a>
+      </div>
+      <div class="d-flex">
+        <a href="#" class="nav-link px-2"
+          ><i class="fa fa-envelope"></i> Email</a
+        >
+        <a href="#" class="nav-link px-2"
+          ><i class="fa fa-phone"></i> Call us</a
+        >
+      </div>
+    </div>
+  </nav>
+
+  <!-- Giao diện laptop -->
+  <section
+    class="header-main border-bottom d-none d-xl-flex"
+    style="padding: 12px 0">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- LOGO -->
+        <div style="width: 100px">
+          <a href="{% url 'home' %}" class="text-decoration-none">
+            <p
+              style="
+                display: table-caption;
+                font-family: 'Segoe UI';
+                font-size: 37px;
+                font-weight: 700;
+                color: #bab3b3;
+                margin: 0;
+                letter-spacing: 4px;
+                text-shadow: 3px 4px 4px rgba(0, 0, 0, 0.6);
+              ">
+              CPDV
+            </p>
+          </a>
+        </div>
+
+        <!-- Category + Store + Search -->
+        <div
+          style="
+            flex: 4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+          ">
+          <div class="dropdown">
+            <button
+              class="btn btn-primary dropdown-toggle w-auto"
+              type="button"
+              data-toggle="dropdown">
+              <i class="fa fa-bars"></i> All category
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'store' %}">All Products</a>
+              {% for category in links %}
+              <a class="dropdown-item" href="{{ category.get_url }}"
+                >{{ category.category_name }}</a
+              >
+              {% endfor %}
+            </div>
+          </div>
+
+          <a href="{% url 'store' %}" class="btn btn-outline-primary w-auto"
+            >Store</a
+          >
+
+          <form
+            action="{% url 'search' %}"
+            method="GET"
+            style="display: flex; gap: 8px">
+            {% csrf_token %}
+            <input
+              type="text"
+              class="form-control"
+              name="keyword"
+              placeholder="Search"
+              style="min-width: 450px" />
+            <button type="submit" class="btn btn-primary">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- User + Cart -->
+        <div
+          style="
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+          ">
+          <div class="text-end">
+            {% if user.id is None %}
+            <small class="text-muted">Welcome guest!</small><br />
+            <a href="{% url 'login' %}">Sign in</a> |
+            <a href="{% url 'register' %}">Register</a>
+            {% else %}
+            <small class="text-muted">Welcome {{ user.first_name }}!</small
+            ><br />
+            <a href="{% url 'dashboard' %}">Dashboard</a> |
+            <a href="{% url 'logout' %}">Logout</a>
+            {% endif %}
+          </div>
+
+          <div style="position: relative">
+            <a
+              href="{% url 'cart' %}"
+              class="d-inline-block text-dark"
+              style="text-decoration: none">
+              <div class="d-inline-block border rounded-circle p-2">
+                <i class="fa fa-shopping-cart"></i>
+              </div>
+              <span
+                class="badge badge-danger rounded-pill"
+                style="
+                  position: absolute;
+                  top: -8px;
+                  right: -8px;
+                  font-size: 12px;
+                  padding: 4px 6px;
+                ">
+                {{ cart_count }}
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Giao diện tablet/mobile -->
+  <section
+    class="d-flex d-xl-none justify-content-between align-items-center px-3 py-2 border-bottom">
+    <div>
+      <a href="{% url 'home' %}" class="text-decoration-none">
+        <p
+          style="
+            font-family: 'Segoe UI';
+            font-size: 28px;
+            font-weight: 700;
+            color: #bab3b3;
+            margin: 0;
+            letter-spacing: 3px;
+          ">
+          CPDV
+        </p>
+      </a>
+    </div>
+
+    <div class="dropdown">
+      <button
+        class="btn btn-outline-secondary dropdown-toggle"
+        type="button"
+        data-toggle="dropdown">
+        <i class="fa fa-bars"></i> Menu
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <!-- Tài khoản -->
+        {% if user.id is None %}
+        <a class="dropdown-item" href="{% url 'login' %}">Sign in</a>
+        <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+        {% else %}
+        <span class="dropdown-item-text text-muted"
+          >Welcome {{ user.first_name }}</span
+        >
+        <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
+        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        {% endif %}
+
+        <div class="dropdown-divider"></div>
+
+        <!-- Giỏ hàng -->
+        <a
+          class="dropdown-item d-flex justify-content-between align-items-center"
+          href="{% url 'cart' %}">
+          Cart <span class="badge badge-danger">{{ cart_count }}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</header>
