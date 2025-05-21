@@ -1,46 +1,712 @@
-/* Hide Radio button */
-.rate > input{
-  display: none;
+/* custom.css */
+
+body {
+    background-color: #f4f4f4; /* Màu nền xám nhạt giống Fahasa */
+}
+.rounded-lg {
+    border-radius: 8px !important;
 }
 
-.rate{
-  display: inline-block;;
-  border: 0;
+/* Main Carousel Fahasa Style */
+#carouselExampleIndicators .carousel-inner img { /* Target carousel chính */
+    object-fit: cover;
+    /* Cân nhắc đặt max-height nếu ảnh quá cao */
+    /* max-height: 450px; */
 }
 
-.rate > label{
-  float: right;
+/* Side Banners Fahasa Style */
+.section-main-banner-fahasa .col-lg-4 img {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    /* Cố gắng đặt tỷ lệ khung hình cho banner phụ */
+    aspect-ratio: 16 / 9; /* Hoặc tỷ lệ phù hợp với ảnh banner phụ của Fahasa */
+    object-fit: cover; /* Hoặc contain tùy ảnh */
 }
 
-/* Showing the stars */
-.rate > label:before{
-  display: inline-block;
-  font-size: 1.1rem;
-  font-family: FontAwesome;
-  content: "\f005";
-  margin:0;
-  padding:0.3rem .2rem;
-  cursor: pointer;
+/* Promotion Blocks Fahasa Style */
+.promo-card-fahasa {
+    border: 1px solid #e0e0e0;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.promo-card-fahasa:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+a a {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Để cả card là link */
+}
+.promo-card-fahasa .card-img-top {
+    width: 100%;
+    /* Điều chỉnh tỷ lệ này cho phù hợp với ảnh của bạn */
+    /* Ảnh của Fahasa cho các khối này thường có chiều cao lớn hơn chiều rộng một chút */
+    aspect-ratio: 3 / 4; /* Thử nghiệm tỷ lệ này */
+    object-fit: cover; /* Quan trọng: cover để lấp đầy, contain để hiển thị toàn bộ ảnh */
+    padding: 0; /* Bỏ padding mặc định nếu có */
+}
+.promo-card-fahasa-footer {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.promo-card-fahasa-footer .card-title {
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-/* Half star */
-.rate .half:before{
-  content: "\f089";
-  position: absolute;
-  padding-right: 0;
+/* Icon Quick Links (Nếu bạn quyết định sử dụng) */
+.icon-wrapper-fahasa {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden; /* Để ảnh không tràn ra ngoài */
+}
+.icon-wrapper-fahasa img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
 }
 
-/* Click and hover */
-input:checked ~ label, label:hover ~ label{
-  color: #ffb503;
+/* Product Listing */
+.card-product-grid-fahasa {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s;
+    border: 1px solid rgba(0,0,0,0.1);
 }
 
-/* hover hightlight */
-input:checked + label:hover, input:checked ~ label:hover,input:checked ~ label:hover ~ label,
-label:hover ~ input:checked ~ label{
-  color: #cc9000;
+.card-product-grid-fahasa:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
 }
 
-.rating-star i{
-  color: #ffb503 !important;
+.card-product-grid-fahasa .img-wrap {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.card-product-grid-fahasa .product-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.card-product-grid-fahasa:hover .product-image {
+    transform: scale(1.05);
+}
+
+.card-product-grid-fahasa .info-wrap {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: #f9f9f9;
+}
+
+.card-product-grid-fahasa .title {
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 40px;
+    text-decoration: none;
+}
+
+.card-product-grid-fahasa .price-new-bold {
+    font-weight: bold;
+    color: #ed1c24;
+    font-size: 16px;
+}
+
+.card-product-grid-fahasa .price-old {
+    color: #999;
+    font-size: 14px;
+    text-decoration: line-through;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .section-main-banner-fahasa .col-lg-4 {
+        display: flex;
+        gap: 15px;
+    }
+    .section-main-banner-fahasa .col-lg-4 > div {
+        flex: 1;
+    }
+}
+/* 
+
+
+
+
+/* Card Product Styling for Store Page */
+.card-product-grid-fahasa {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.card-product-grid-fahasa:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.card-product-grid-fahasa .img-wrap {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.card-product-grid-fahasa .product-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.card-product-grid-fahasa:hover .product-image {
+    transform: scale(1.05);
+}
+
+.card-product-grid-fahasa .title {
+    color: #333;
+    font-weight: 500;
+    height: 40px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-decoration: none;
+}
+
+.card-product-grid-fahasa .price-new-bold {
+    font-weight: bold;
+    color: #ed1c24;
+    font-size: 16px;
+}
+
+.card-product-grid-fahasa .price-old {
+    color: #999;
+    font-size: 14px;
+    text-decoration: line-through;
+}
+
+/* Product detail styling */
+.product-meta {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.thumbnail-nav-item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.thumbnail-nav-item.active {
+    border-color: #007bff;
+}
+
+/* Quantity input styling */
+.quantity-control {
+    width: 120px;
+}
+
+.quantity-control .quantity-btn {
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+.quantity-control input {
+    width: 40px;
+    font-weight: bold;
+    background: transparent;
+}
+
+.quantity-control .input-group-prepend,
+.quantity-control .input-group-append {
+    cursor: pointer;
+}
+
+/* Fix border radius for prepend/append buttons */
+.quantity-control .input-group-prepend .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.quantity-control .input-group-append .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+
+/* Đánh giá sản phẩm */
+.rating-stars i {
+    color: #f8ce0b;
+}
+
+.review-item {
+    border-bottom: 1px solid #eee;
+}
+
+.verified-badge {
+    display: inline-block;
+    font-size: 12px;
+}
+
+/* Tab styling */
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+    color: #212529;
+    border-bottom: 2px solid #f57224;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #6c757d;
+    padding: 0.5rem 1rem;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Progress bar styling */
+.progress-bar {
+    background-color: #f57224;
+}
+
+/* Category styling */
+.category-item {
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.2s;
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+    color: #007bff;
+}
+
+.category-icon {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.category-item:hover .category-icon {
+    background-color: #007bff !important;
+    color: white;
+}
+
+.category-item:hover .category-icon i {
+    color: white;
+}
+
+.category-name {
+    margin-top: 8px;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+/* Category carousel styling */
+.categories-carousel-container {
+    position: relative;
+}
+
+.categories-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding: 10px 5px;
+}
+
+.categories-carousel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.category-item-wrapper {
+    flex: 0 0 auto;
+    transition: transform 0.3s;
+}
+
+.category-item-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.categories-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #eee;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.categories-nav-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.carousel-control-prev.categories-nav-btn {
+    left: -10px;
+}
+
+.carousel-control-next.categories-nav-btn {
+    right: -10px;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    filter: invert(1) grayscale(100%);
+}
+
+/* Footer styling */
+.title-footer {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #212529;
+}
+
+footer .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    transition: all 0.3s;
+}
+
+footer .social-icon:hover {
+    background-color: #C92127; /* Fahasa red color */
+    color: white;
+}
+
+footer a {
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: #C92127 !important; /* Fahasa red color */
+}
+
+
+/* Checkout page styling */
+.checkout-section {
+    padding: 40px 0;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.checkout-card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 20px;
+}
+
+.checkout-card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+input[readonly] {
+    background-color: #f8f9fa;
+}
+/* Styling giỏ hàng */
+.table-shopping-cart {
+    margin-bottom: 0;
+}
+
+.cart-product-img img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.cart-product-info a {
+    font-weight: 500;
+    text-decoration: none;
+    color: #333;
+}
+
+.cart-product-info a:hover {
+    color: #0d6efd;
+}
+
+.quantity-control .input-group {
+    width: 120px;
+}
+
+.quantity-control .form-control {
+    text-align: center;
+    font-weight: 500;
+}
+
+.item-price {
+    font-weight: 500;
+    color: #0d6efd;
+}
+
+/* Hiệu ứng cho các thay đổi */
+.updating {
+    background-color: rgba(255, 243, 205, 0.5);
+    transition: background-color 0.5s ease;
+}
+
+.price-updated {
+    animation: flash-price 0.7s;
+}
+
+@keyframes flash-price {
+    0% { background-color: transparent; }
+    50% { background-color: rgba(255, 243, 205, 0.7); }
+    100% { background-color: transparent; }
+}
+
+/* Empty cart styling */
+.empty-cart-icon {
+    color: #dee2e6;
+}
+
+
+
+
+/* Thêm vào file CSS của bạn */
+
+/* Đảm bảo hình ảnh luôn hiển thị đúng tỷ lệ trên mọi thiết bị */
+.promo-card-fahasa img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    min-height: 120px; /* Đảm bảo chiều cao tối thiểu */
+}
+
+/* Cải thiện hiển thị trên thiết bị nhỏ */
+@media (max-width: 767px) {
+    .section-promotion-blocks-fahasa .card-img-top {
+        padding: 5px !important;
+    }
+    
+    .promo-card-fahasa {
+        margin-bottom: 10px;
+    }
+    
+    /* Đảm bảo banner luôn hiển thị đúng kích thước */
+    .section-main-banner-fahasa img {
+        width: 100%;
+        height: auto;
+    }
+    
+    /* Điều chỉnh kích thước sản phẩm trên mobile */
+    .card-product-grid-fahasa .img-wrap {
+        height: 150px;
+    }
+    
+    .card-product-grid-fahasa .title {
+        font-size: 0.85rem;
+    }
+    
+    .price-new-bold {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* Order Tracking Timeline */
+.order-tracking-timeline {
+    padding: 20px 0;
+}
+
+.timeline-track {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0;
+    padding-top: 20px;
+}
+
+.timeline-track::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #e9ecef;
+    z-index: 1;
+}
+
+.timeline-progress {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    height: 4px;
+    background-color: #28a745;
+    z-index: 2;
+    transition: width 0.5s ease;
+}
+
+.timeline-step {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    width: 20%;
+}
+
+.timeline-step-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-step.active .timeline-step-icon {
+    background-color: #28a745;
+    color: white;
+}
+
+.timeline-step-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.timeline-step.active .timeline-step-label {
+    color: #212529;
+    font-weight: 600;
+}
+
+.timeline-step-date {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* For cancelled orders */
+.cancelled-order .timeline-track::before {
+    background-color: #dc3545;
+}
+
+/* Timeline trong dashboard */
+.timeline {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 1.5rem;
+    border-left: 1px solid #e0e0e0;
+    padding-left: 1.5rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -0.4rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+}
+
+
+
+.promo-card-custom {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Quan trọng để thẻ <a> chiếm hết chiều cao card */
+}
+
+.promo-card-custom .promo-card-image-wrapper {
+    height: 120px; /* Đặt chiều cao cố định cho vùng ảnh. Bạn có thể thay đổi giá trị này */
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.promo-card-custom .promo-card-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.promo-card-custom .promo-card-fahasa-footer {
+    /* margin-top: auto;  Bỏ cái này đi nếu muốn nó phình ra */
+    flex-grow: 1; /* Cho phép footer phình ra để chiếm không gian còn lại */
+    display: flex;
+    flex-direction: column; /* Để căn giữa nội dung trong footer mới */
+    justify-content: center; /* Căn giữa chữ MUA NGAY */
+    align-items: center;
+    background-color: #ED5156;
+    padding: 0.5rem; /* Đặt một ít padding cho dễ nhìn */
+    min-height: auto !important; /* Hoặc min-height: 0 !important; để thử loại bỏ min-height mặc định */
+
+}
+
+.promo-card-custom .promo-card-fahasa-footer h6 {
+    margin-bottom: 0;
+}
+
+
+/* CSS RIÊNG CHO FOOTER CỦA BOX CUỐI CÙNG */
+.last-promo-item .promo-card-custom .promo-card-fahasa-footer {
+    margin-top: 0; /* Ghi đè margin-top: auto từ rule chung */
+    flex-grow: 1;  /* Cho phép footer này phình ra */
+    /* Các thuộc tính display, align-items, justify-content đã có ở rule chung
+       sẽ giúp căn giữa chữ "MUA NGAY" khi footer cao hơn. */
+}
+
+
+.section-promotion-block .col-md-3 {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
 }
