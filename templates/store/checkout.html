@@ -160,7 +160,61 @@
 
 
 
-
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Xử lý khi submit form
+    $('form').submit(function(e) {
+        // Nếu chọn thanh toán khi nhận hàng
+        if ($('#payment_cod').is(':checked')) {
+            e.preventDefault(); // Ngăn chặn form submit bình thường
+            
+            // Hiển thị trạng thái đang xử lý
+            $('#place-order-btn').prop('disabled', true);
+            $('#place-order-btn').html('<i class="fas fa-spinner fa-spin"></i> Đang xử lý...');
+            
+            // Gửi form qua AJAX
+            $.ajax({
+                type: 'POST',
+                url: '{% url "place_order" %}',
+                data: $(this).serialize(),
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                success: function(response) {
+                    if (response.success) {
+                        // Hiển thị thông báo thành công
+                        $('#order-success-message').show().html(`
+                            <i class="fas fa-check-circle mr-2"></i> 
+                            Đặt hàng thành công! Mã đơn hàng của bạn là: <strong>${response.order_number}</strong>
+                        `);
+                        
+                        // Cuộn đến thông báo
+                        $('html, body').animate({
+                            scrollTop: $('#order-success-message').offset().top - 100
+                        }, 500);
+                        
+                        // Chuyển hướng sau 3 giây
+                        setTimeout(function() {
+                            window.location.href = '{% url "dashboard" %}';
+                        }, 3000);
+                    } else {
+                        // Hiển thị lỗi nếu có
+                        alert('Lỗi: ' + response.message);
+                        $('#place-order-btn').prop('disabled', false);
+                        $('#place-order-btn').html('Đặt hàng');
+                    }
+                },
+                error: function() {
+                    alert('Đã xảy ra lỗi khi xử lý đơn hàng. Vui lòng thử lại.');
+                    $('#place-order-btn').prop('disabled', false);
+                    $('#place-order-btn').html('Đặt hàng');
+                }
+            });
+        }
+        // Nếu chọn thanh toán thẻ, form sẽ được gửi bình thường
+    });
+});
+</script>
+{% endblock %}
 
 
 {% endblock %}
