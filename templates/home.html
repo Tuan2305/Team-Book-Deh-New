@@ -139,9 +139,9 @@
                                     <figcaption class="info-wrap text-center">
                                         <a href="{{ product.get_url }}" class="title text-truncate mb-1">{{ product.product_name }}</a>
                                         {% if product.old_price %}
-                                        <del class="price-old d-block">{{ product.old_price }}đ</del>
+                                        <del class="price-old d-block">{{ product.old_price | intcomma }}đ</del>
                                         {% endif %}
-                                        <span class="price-new-bold d-block">{{ product.price }}đ</span>
+                                        <span class="price-new-bold d-block">{{ product.price | intcomma }}đ</span>
                                     </figcaption>
                                 </div>
                             </div>
