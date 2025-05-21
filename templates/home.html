@@ -2,6 +2,8 @@
 {% load static %}
 {% load custom_filters %}
 
+{%load humanize %}
+
 {% block content %}
 
 <!-- SECTION 1: MAIN CAROUSEL (LEFT) & SIDE BANNERS (RIGHT) - Theo layout Fahasa -->
@@ -210,7 +212,7 @@
                                 {% if product.old_price %}
                                 <del class="price-old d-block">{{ product.old_price }}đ</del>
                                 {% endif %}
-                                <span class="price-new-bold d-block">{{ product.price }}đ</span>
+                                <span class="price-new-bold d-block">{{ product.price | intcomma }}đ</span>
                             </div>
                         </figcaption>
                     </div>
