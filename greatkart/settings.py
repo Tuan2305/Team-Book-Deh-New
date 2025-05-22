@@ -1,13 +1,15 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+# from decouple import config
+from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = True
@@ -24,11 +26,13 @@ INSTALLED_APPS = [
     'store',
     'carts',
     'orders',
+    'rosetta',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -78,7 +82,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
-
+LANGUAGES = [
+    ('en', _('English')),
+    ('ja', _('Japanese')),
+]
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -102,3 +109,16 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mtuan23052004@gmail.com'
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
+
+
+# Stripe Settings - Test Keys
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+
+# Allow to use rosetta
+ROSETTA_ACCESS_CONTROL_FUNCTION = lambda u: True
+
+LOCALE_PATHS = [BASE_DIR / 'locale']
+
+USE_I18N = True
+USE_L10N = True
