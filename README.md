@@ -4,13 +4,15 @@ Book Store is an e-commerce web project for selling books, developed with Django
 
 ---
 
-## 🔧 Technologies Used
+## Technologies Used
 
 - **Backend:** Django 5.1.2
 - **Frontend:** HTML, CSS, JavaScript, Bootstrap
 - **Database:** MySQL
 - **Payment:** Stripe API
 - **Authentication:** Django Authentication System
+- **Live Chat:** Tawk.to Chat API
+- **Translation Management:** Django Rosetta
 
 ---
 
